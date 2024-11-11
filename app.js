@@ -22,7 +22,7 @@ async function authMiddleware(req, res, next) {
         return res.redirect('/login');
     }
 
-    const sessionExists = await fetch("http://localhost:5500/auth/checkSession", {
+    const sessionExists = await fetch("http://54.89.202.239:5500/auth/checkSession", {
       method: "POST",
       body: JSON.stringify({session: req.cookies._sid}),
       headers: {
