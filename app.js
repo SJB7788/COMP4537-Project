@@ -22,7 +22,7 @@ async function authMiddleware(req, res, next) {
         return res.redirect('/login');
     }
 
-    const sessionExists = await fetch("http://54.89.202.239:5500/auth/checkSession", {
+    const sessionExists = await fetch("https://54.226.92.203.nip.io/auth/checkSession", {
       method: "POST",
       body: JSON.stringify({session: req.cookies._sid}),
       headers: {
@@ -39,7 +39,9 @@ async function authMiddleware(req, res, next) {
     next();
 }
 
-app.get("/login", (_, res) => {
+app.get("/login", (req, res) => {
+    console.log(req.cookies._sid);
+    
     res.sendFile("public/login.html", {root: __dirname});
 });
 

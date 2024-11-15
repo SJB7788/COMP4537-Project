@@ -1,6 +1,6 @@
 import { Auth } from "./auth/authClass.js";
 
-const auth = new Auth("http://54.89.202.239:5500");
+const auth = new Auth("https://54.226.92.203.nip.io");
 
 const email = document.getElementById("email");
 const firstName = document.getElementById("first_name");
