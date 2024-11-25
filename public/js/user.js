@@ -1,5 +1,15 @@
 import { Auth } from "./auth/authClass.js";
 
+const userInfo = await fetch("http://localhost:5500/auth/userInfo", {
+    method: "GET",
+    credentials: "include",
+});
+const user = await userInfo.json();
+const userData = JSON.parse(user.data);
+
+const title = document.getElementById("api_title");
+title.textContent = `${userData.first_name}'s API Calls`;
+
 class ViewAPICall {
     constructor(container) {
         this.container = container;
@@ -21,7 +31,7 @@ const apiCount = document.getElementById("api_count");
 const container = document.getElementById("api__table");
 const viewApiCall = new ViewAPICall(container);
 
-const everyAPICall = await fetch("https://54.226.92.203.nip.io/auth/apiCalls", {
+const everyAPICall = await fetch("http://localhost:5500/auth/apiCalls", {
     credentials: "include",
 });
 const apiCalls = await everyAPICall.json();
@@ -35,7 +45,7 @@ if (apiCallsData.length > 0) {
     });
 }
 
-const auth = new Auth("https://54.226.92.203.nip.io");
+const auth = new Auth("http://localhost:5500");
 const logoutA = document.getElementById("logout_a");
 logoutA.addEventListener("click", async () => {
     const response = await auth.logoutUser();

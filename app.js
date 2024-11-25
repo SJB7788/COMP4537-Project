@@ -22,7 +22,7 @@ async function authMiddleware(req, res, next) {
         return res.redirect('/login');
     }
 
-    const sessionExists = await fetch("https://54.226.92.203.nip.io/auth/checkSession", {
+    const sessionExists = await fetch("http://localhost:5500/auth/checkSession", {
       method: "POST",
       body: JSON.stringify({session: req.cookies._sid}),
       headers: {
@@ -34,6 +34,31 @@ async function authMiddleware(req, res, next) {
     
     if (response.success === false) {
         return res.redirect('/login');
+    }
+
+    next();
+}
+
+async function adminAuthMiddleware(req, res, next) {
+    const token = req.cookies && req.cookies._sid;
+
+    if (!token) {
+        return res.redirect('/login');
+    }
+
+    const sessionExists = await fetch("http://localhost:5500/auth/checkAdmin", {
+      method: "POST",
+      body: JSON.stringify({session: req.cookies._sid}),
+      headers: {
+        "Content-Type": "application/json", 
+      },
+      credentials: "include"
+    })
+    
+    const response = await sessionExists.json();
+    
+    if (response.success === false) {
+        return res.redirect('/user');
     }
 
     next();
@@ -51,6 +76,14 @@ app.get("/register", (_, res) => {
 
 app.get("/user", authMiddleware, (_, res) => {
     res.sendFile("public/user.html", {root: __dirname});
+});
+
+app.get("/admin", adminAuthMiddleware, (_, res) => {
+    res.sendFile("public/admin.html", {root: __dirname});
+});
+
+app.get("/details", adminAuthMiddleware, (_, res) => {
+    res.sendFile("public/details.html", {root: __dirname});
 });
 
 const port = process.env.PORT || 8080;

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/user.css" />
-    <script src="./js/user.js" defer></script>
+    <script type="module" src="./js/admin.js" defer></script>
     <title>Admin</title>
   </head>
   <body>
@@ -16,8 +16,8 @@
         <p id="navbar__title">Admin API Services</p>
       </div>
       <div class="navbar-items__container" id="navbar-items-action__container">
-        <a href="" class="navbar__item">User</a>
-        <a href="" class="navbar__item">Settings</a>
+        <a href="/" class="navbar__item">Admin</a>
+        <a href="/api" class="navbar__item">API</a>
         <a href="" class="navbar__item">Logout</a>
       </div>
     </section>
@@ -28,9 +28,8 @@
       </div>
       <div id="view-api__table__section">
         <p id="api_count">Total API Users: 1</p>
-        <table>
+        <table id="user_table">
           <tr>
-            <th>User ID</th>
             <th>First name</th>
             <th>Last name</th>
             <th>Email</th>
@@ -38,12 +37,6 @@
             <th></th>
           </tr>
           <tr>
-            <td>1</td>
-            <td>John</td>
-            <td>Doe</td>
-            <td>JohnDoe@example.com</td>
-            <td>1</td>
-            <td><a href="">Details</a></td>
           </tr>
         </table>
       </div>

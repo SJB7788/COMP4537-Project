@@ -1,6 +1,6 @@
 import { Auth } from "./auth/authClass.js";
 
-const auth = new Auth("https://54.226.92.203.nip.io");
+const auth = new Auth("http://localhost:5500");
 
 const email = document.getElementById("email");
 const password = document.getElementById("password");
