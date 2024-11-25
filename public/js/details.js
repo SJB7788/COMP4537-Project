@@ -5,7 +5,7 @@ const userId = urlParams.get("user");
 
 document.addEventListener("DOMContentLoaded", async () => {
   const userResponse = await fetch(
-    `http://localhost:5500/auth/getUserDetails?user=${userId}`,
+    `https://52.70.76.55.nip.io/auth/getUserDetails?user=${userId}`,
     {
       method: "GET",
       headers: {
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   );
 
   const apiCallsResponse = await fetch(
-    `http://localhost:5500/auth/getUserApiCalls?user=${userId}`,
+    `https://52.70.76.55.nip.io/auth/getUserApiCalls?user=${userId}`,
     {
       method: "GET",
       headers: {

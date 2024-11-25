@@ -22,7 +22,7 @@ async function authMiddleware(req, res, next) {
         return res.redirect('/login');
     }
 
-    const sessionExists = await fetch("http://localhost:5500/auth/checkSession", {
+    const sessionExists = await fetch("https://52.70.76.55.nip.io/auth/checkSession", {
       method: "POST",
       body: JSON.stringify({session: req.cookies._sid}),
       headers: {
@@ -46,7 +46,7 @@ async function adminAuthMiddleware(req, res, next) {
         return res.redirect('/login');
     }
 
-    const sessionExists = await fetch("http://localhost:5500/auth/checkAdmin", {
+    const sessionExists = await fetch("https://52.70.76.55.nip.io/auth/checkAdmin", {
       method: "POST",
       body: JSON.stringify({session: req.cookies._sid}),
       headers: {

@@ -1,7 +1,7 @@
 const userTable = document.getElementById("user_table");
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const response = await fetch("http://localhost:5500/auth/getAllUsers", {
+  const response = await fetch("https://52.70.76.55.nip.io/auth/getAllUsers", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
