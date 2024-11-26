@@ -28,6 +28,7 @@ async function authMiddleware(req, res, next) {
       headers: {
         "Content-Type": "application/json", 
       },
+      credentials: 'include',
     })
     
     const response = await sessionExists.json();
