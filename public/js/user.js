@@ -1,11 +1,12 @@
 import { Auth } from "./auth/authClass.js";
 
-const userInfo = await fetch("https://52.70.76.55.nip.io/auth/userInfo", {
+const userInfo = await fetch("https://44.223.10.16.nip.io/auth/userInfo", {
     method: "GET",
     credentials: "include",
 });
 const user = await userInfo.json();
 const userData = JSON.parse(user.data);
+console.log(userData);
 
 const title = document.getElementById("api_title");
 title.textContent = `${userData.first_name}'s API Calls`;
@@ -31,7 +32,7 @@ const apiCount = document.getElementById("api_count");
 const container = document.getElementById("api__table");
 const viewApiCall = new ViewAPICall(container);
 
-const everyAPICall = await fetch("https://52.70.76.55.nip.io/auth/apiCalls", {
+const everyAPICall = await fetch("https://44.223.10.16.nip.io/auth/apiCalls", {
     credentials: "include",
 });
 const apiCalls = await everyAPICall.json();
@@ -45,7 +46,7 @@ if (apiCallsData.length > 0) {
     });
 }
 
-const auth = new Auth("https://52.70.76.55.nip.io:5500");
+const auth = new Auth("https://44.223.10.16.nip.io");
 const logoutA = document.getElementById("logout_a");
 logoutA.addEventListener("click", async () => {
     const response = await auth.logoutUser();

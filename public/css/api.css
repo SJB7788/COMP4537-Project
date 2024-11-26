@@ -6,6 +6,7 @@ body {
 #navbar__section {
     padding: 15px 20px;
     width: calc(100vw - 40px);
+    margin-bottom: 50px;
     height: 40px;
     display: flex;
     flex-direction: row;
@@ -34,13 +35,6 @@ body {
     justify-content: space-around;
 }
 
-#api-call__section {
-    padding: 0 20px;
-    width: calc(100vw - 40px);
-    display: flex;
-    flex-direction: column;
-}
-
 #user_item {
     text-align: center;
     text-decoration: none;
@@ -58,24 +52,47 @@ body {
     font-weight: 600;
 }
 
-table {
-    width: calc(100vw - 40px);
-    border-collapse: collapse;
+#api-call__section {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-th {
-    padding: 0.75em;
+#api-caller__container {
+    display: flex;
+    flex-direction: column;
+    width: 70vw;
+    height: 35vh;
+    margin-bottom: 20px;
 }
 
-td {   
-    padding: 0.5em 0.75em;
-    background-color: #dddddd;
+#api-caller__container label {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
-th,
-td {
+#summarize-text {
+    height: 100%;
+    resize: none;
+}
+
+#summarize-button {
+    margin-top: 10px;
+    width: 90px;
+}
+
+#api-result__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    width: 70vw;
+    height: 30vh;
+}
+
+#result__container {
     border: 1px solid black;
-    padding-right: 2em;
-    text-align: left;
+    height: 100%;
+    width: 100%;
 }
-

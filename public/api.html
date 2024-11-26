@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/user.css" />
-    <script type="module" src="./js/user.js" defer></script>
-    <title>User</title>
+    <link rel="stylesheet" href="./css/api.css" />
+    <script type="module" src="./js/api.js" defer></script>
+    <title>Summarize API</title>
   </head>
   <body>
     <section id="navbar__section">
@@ -13,7 +13,7 @@
         <a href="" id="navbar-item__logo">
           <img src="" alt="logo" id="navar-logo__img" />
         </a>
-        <p id="navbar__title">API Services</p>
+        <p id="navbar__title">Summarize API Service</p>
       </div>
       <div class="navbar-items__container" id="navbar-items-action__container">
         <a href="" id="user_item" class="navbar__item">User</a>
@@ -23,20 +23,16 @@
     </section>
 
     <section id="api-call__section">
-      <div id="view-api__title__section">
-        <p id="api_title">User's API Call</p>
+      <div id="api-caller__container">
+        <label for="summarize-text">Add Text to Summarize Here</label>
+        <textarea name="summarize-text" id="summarize-text"></textarea>
+        <button id="summarize-button">Summarize</button>
       </div>
-      <div id="view-api__table__section">
-        <p id="api_count"></p>
-        <table id="api__table">
-          <tr>
-            <th>Call ID</th>
-            <th>Request Type</th>
-            <th>Text</th>
-          </tr>
-          <tr>
-          </tr>
-        </table>
+      <div id="api-result__container">
+        <h3>Results:</h3>
+        <div id="result__container">
+          <p id="summarized-result"></p>
+        </div>
       </div>
     </section>
   </body>

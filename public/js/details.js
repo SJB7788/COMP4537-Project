@@ -1,3 +1,5 @@
+import { Auth } from "./auth/authClass.js";
+
 const memberTitle = document.getElementById("api_title");
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -5,7 +7,7 @@ const userId = urlParams.get("user");
 
 document.addEventListener("DOMContentLoaded", async () => {
   const userResponse = await fetch(
-    `https://52.70.76.55.nip.io/auth/getUserDetails?user=${userId}`,
+    `https://44.223.10.16.nip.io/auth/getUserDetails?user=${userId}`,
     {
       method: "GET",
       headers: {
@@ -15,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   );
 
   const apiCallsResponse = await fetch(
-    `https://52.70.76.55.nip.io/auth/getUserApiCalls?user=${userId}`,
+    `https://44.223.10.16.nip.io/auth/getUserApiCalls?user=${userId}`,
     {
       method: "GET",
       headers: {
@@ -74,3 +76,12 @@ function renderApiCalls(apiCalls) {
     });
   }
 }
+
+const auth = new Auth("https://44.223.10.16.nip.io");
+const logoutA = document.getElementById("logout_a");
+logoutA.addEventListener("click", async () => {
+    const response = await auth.logoutUser();
+    if (response === true) {
+        window.location.href = "/login";
+    }
+});
