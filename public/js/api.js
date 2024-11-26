@@ -3,10 +3,12 @@ const summarizeButton = document.getElementById("summarize-button");
 
 const resultP = document.getElementById("summarized-result");
 
-const apiToken = await fetch("http://localhost:5500/auth/getUserToken", {
+const response = await fetch("https://44.223.10.16.nip.io/auth/getUserToken", {
     method: "GET",
     credentials: "include",
 });
+
+const apiToken = await response.json();
 
 async function sendSummarizeApiRequest() {
     console.log(textArea.textContent);
@@ -16,7 +18,7 @@ async function sendSummarizeApiRequest() {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({token: apiToken, text: textArea.textContent}),
+        body: JSON.stringify({token: apiToken.data, text: textArea.textContent}),
     });
 
     return await response.json();
@@ -24,7 +26,5 @@ async function sendSummarizeApiRequest() {
 
 summarizeButton.addEventListener("click", async () => {
     const jsonResult = await sendSummarizeApiRequest();
-    console.log(jsonResult);
-    
     resultP.textContent = jsonResult.summary;
 });
