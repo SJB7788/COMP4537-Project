@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     },
   });
 
-  const apiCountResponse = await fetch("http://localhost:5500/auth/getTotalApiCount", {
+  const apiCountResponse = await fetch("https://sjbportfolio.com/auth/getTotalApiCount", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
