@@ -7,7 +7,7 @@ const userId = urlParams.get("user");
 
 document.addEventListener("DOMContentLoaded", async () => {
   const userResponse = await fetch(
-    `https://sjbportfolio.com/auth/getUserDetails?user=${userId}`,
+    `http://localhost:5500/auth/getUserDetails?user=${userId}`,
     {
       method: "GET",
       headers: {
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   );
 
   const apiCallsResponse = await fetch(
-    `https://sjbportfolio.com/auth/getUserApiCalls?user=${userId}`,
+    `http://localhost:5500/auth/getUserApiCalls?user=${userId}`,
     {
       method: "GET",
       headers: {
@@ -77,7 +77,7 @@ function renderApiCalls(apiCalls) {
   }
 }
 
-const auth = new Auth("https://sjbportfolio.com");
+const auth = new Auth("http://localhost:5500");
 const logoutA = document.getElementById("logout_a");
 logoutA.addEventListener("click", async () => {
     const response = await auth.logoutUser();

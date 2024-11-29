@@ -1,9 +1,10 @@
 import { Auth } from "./auth/authClass.js";
 
-const userInfo = await fetch("https://sjbportfolio.com/auth/userInfo", {
+const userInfo = await fetch("http://localhost:5500/auth/userInfo", {
     method: "GET",
     credentials: "include",
 });
+
 const user = await userInfo.json();
 const userData = JSON.parse(user.data);
 console.log(userData);
@@ -32,7 +33,7 @@ const apiCount = document.getElementById("api_count");
 const container = document.getElementById("api__table");
 const viewApiCall = new ViewAPICall(container);
 
-const everyAPICall = await fetch("https://sjbportfolio.com/auth/apiCalls", {
+const everyAPICall = await fetch("http://localhost:5500/auth/apiCalls", {
     credentials: "include",
 });
 const apiCalls = await everyAPICall.json();
@@ -46,7 +47,7 @@ if (apiCallsData.length > 0) {
     });
 }
 
-const auth = new Auth("https://sjbportfolio.com");
+const auth = new Auth("http://localhost:5500");
 const logoutA = document.getElementById("logout_a");
 logoutA.addEventListener("click", async () => {
     const response = await auth.logoutUser();

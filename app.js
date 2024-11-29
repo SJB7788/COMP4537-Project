@@ -3,38 +3,45 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require('cookie-parser');
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
 dotenv.config({ path: require("path").resolve(__dirname, ".env") });
 
 const app = express();
 
-app.use(cors(
-    {
-        origin: "https://sjbportfolio.com",
-        credentials: true,
-        methods: "GET, PUT, POST, DELETE, OPTIONS",
-        allowedHeaders: "Content-Type, Authorization, Content-Length, Accept, X-Requested-With, yourHeaderFeild",
-        exposedHeaders: "Content-Length, Authorization",
-    }
-));
+app.use(cors());
+app.use(cookieParser());
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true })); 
-app.use(cookieParser());
 
 app.use(express.static(`${__dirname}/public`));
 
 // auth middleware function
-async function authMiddleware(req, res, next) {    
+async function authMiddleware(req, res, next) {       
+    const token = req.cookies && req.cookies._sid;
+    console.log(req.headers);
+
+    if (!token) {
+        return res.redirect('/login');
+    }
+
+    const cookies = req.headers.cookie;
+    console.log(cookies);
+
     const sessionExists = await fetch("https://sjbportfolio.com/auth/checkSession", {
-      method: "GET",    
-      credentials: 'include',
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json", 
+        Cookie: cookies,
+      },
+      body: JSON.stringify({_sid: req.cookies._sid}),
+      credentials:  "include",
     });
     
     const response = await sessionExists.json();    
     
     if (response.success === false) {
-        // return res.redirect('/login');
-        return res.status(401).send("Unauthorized");
+        return res.redirect('/login');
     }
 
     next();
@@ -47,10 +54,13 @@ async function adminAuthMiddleware(req, res, next) {
         return res.redirect('/login');
     }
 
+    const cookies = req.headers.cookie;
+
     const sessionExists = await fetch("https://sjbportfolio.com/auth/checkAdmin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json", 
+        Cookie: cookies,
       },
       credentials: "include"
     })
@@ -66,7 +76,6 @@ async function adminAuthMiddleware(req, res, next) {
 
 app.get("/login", (req, res) => {
     console.log(req.cookies._sid);
-    
     res.sendFile("public/login.html", {root: __dirname});
 });
 

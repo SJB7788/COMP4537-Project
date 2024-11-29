@@ -3,7 +3,7 @@ const summarizeButton = document.getElementById("summarize-button");
 
 const resultP = document.getElementById("summarized-result");
 
-const response = await fetch("https://sjbportfolio.com/auth/getUserToken", {
+const response = await fetch("http://localhost:5500/auth/getUserToken", {
     method: "GET",
     credentials: "include",
 });
@@ -13,7 +13,7 @@ const apiToken = await response.json();
 async function sendSummarizeApiRequest() {
     console.log(textArea.textContent);
     
-    const response = await fetch("https://sjbportfolio.com/api/v1/summarize", {
+    const response = await fetch("http://localhost:5500/api/v1/summarize", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
