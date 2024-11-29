@@ -7,7 +7,7 @@ const userId = urlParams.get("user");
 
 document.addEventListener("DOMContentLoaded", async () => {
   const userResponse = await fetch(
-    `https://44.223.10.16.nip.io/auth/getUserDetails?user=${userId}`,
+    `https://sjbportfolio.com/auth/getUserDetails?user=${userId}`,
     {
       method: "GET",
       headers: {
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   );
 
   const apiCallsResponse = await fetch(
-    `https://44.223.10.16.nip.io/auth/getUserApiCalls?user=${userId}`,
+    `https://sjbportfolio.com/auth/getUserApiCalls?user=${userId}`,
     {
       method: "GET",
       headers: {
@@ -77,7 +77,7 @@ function renderApiCalls(apiCalls) {
   }
 }
 
-const auth = new Auth("https://44.223.10.16.nip.io");
+const auth = new Auth("https://sjbportfolio.com");
 const logoutA = document.getElementById("logout_a");
 logoutA.addEventListener("click", async () => {
     const response = await auth.logoutUser();

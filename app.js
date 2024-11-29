@@ -8,7 +8,15 @@ dotenv.config({ path: require("path").resolve(__dirname, ".env") });
 
 const app = express();
 
-app.use(cors());
+app.use(cors(
+    {
+        origin: "https://sjbportfolio.com",
+        credentials: true,
+        methods: "GET, PUT, POST, DELETE, OPTIONS",
+        allowedHeaders: "Content-Type, Authorization, Content-Length, Accept, X-Requested-With, yourHeaderFeild",
+        exposedHeaders: "Content-Length, Authorization",
+    }
+));
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(cookieParser());
@@ -17,24 +25,16 @@ app.use(express.static(`${__dirname}/public`));
 
 // auth middleware function
 async function authMiddleware(req, res, next) {    
-    const token = req.cookies && req.cookies._sid;
-    if (!token) {
-        return res.redirect('/login');
-    }
-
-    const sessionExists = await fetch("https://44.223.10.16.nip.io/auth/checkSession", {
-      method: "POST",
-      body: JSON.stringify({session: req.cookies._sid}),
-      headers: {
-        "Content-Type": "application/json", 
-      },
+    const sessionExists = await fetch("https://sjbportfolio.com/auth/checkSession", {
+      method: "GET",    
       credentials: 'include',
-    })
+    });
     
-    const response = await sessionExists.json();
+    const response = await sessionExists.json();    
     
     if (response.success === false) {
-        return res.redirect('/login');
+        // return res.redirect('/login');
+        return res.status(401).send("Unauthorized");
     }
 
     next();
@@ -47,9 +47,8 @@ async function adminAuthMiddleware(req, res, next) {
         return res.redirect('/login');
     }
 
-    const sessionExists = await fetch("https://44.223.10.16.nip.io/auth/checkAdmin", {
+    const sessionExists = await fetch("https://sjbportfolio.com/auth/checkAdmin", {
       method: "POST",
-      body: JSON.stringify({session: req.cookies._sid}),
       headers: {
         "Content-Type": "application/json", 
       },

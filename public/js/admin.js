@@ -3,7 +3,7 @@ import { Auth } from "./auth/authClass.js";
 const userTable = document.getElementById("user_table");
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const response = await fetch("https://44.223.10.16.nip.io/auth/getAllUsers", {
+  const response = await fetch("https://sjbportfolio.com/auth/getAllUsers", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const data = await response.json();
   const allUsers = data.data;
-  console.log(allUsers);
   renderUsers(allUsers);
 });
 
@@ -41,7 +40,7 @@ function renderUsers(users) {
   });
 }
 
-const auth = new Auth("https://44.223.10.16.nip.io");
+const auth = new Auth("https://sjbportfolio.com");
 const logoutA = document.getElementById("logout_a");
 logoutA.addEventListener("click", async () => {
     const response = await auth.logoutUser();

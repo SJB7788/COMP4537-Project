@@ -1,6 +1,6 @@
 import { Auth } from "./auth/authClass.js";
 
-const auth = new Auth("https://44.223.10.16.nip.io");
+const auth = new Auth("https://sjbportfolio.com");
 
 const email = document.getElementById("email");
 const password = document.getElementById("password");
@@ -10,7 +10,7 @@ submit.addEventListener("click", async () => {
   const response = await auth.loginUser(email.value, password.value);
 
   if (response === true) {    
-    window.location.href = "/user";
+    // window.location.href = "/user";
     return;
   }
 
