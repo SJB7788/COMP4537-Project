@@ -3,16 +3,29 @@ import { Auth } from "./auth/authClass.js";
 const userTable = document.getElementById("user_table");
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const response = await fetch("https://sjbportfolio.com/auth/getAllUsers", {
+  const userResponse = await fetch("https://sjbportfolio.com/auth/getAllUsers", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   });
 
-  const data = await response.json();
-  const allUsers = data.data;
+  const apiCountResponse = await fetch("http://localhost:5500/auth/getTotalApiCount", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const userData = await userResponse.json();
+  const allUsers = userData.data;
   renderUsers(allUsers);
+
+  const apiCountData = await apiCountResponse.json();
+  const apiCount = apiCountData.data.count;
+
+  const apiCountLabel = document.getElementById("api_count");
+  apiCountLabel.textContent += apiCount;
 });
 
 function renderUsers(users) {
@@ -44,7 +57,6 @@ const auth = new Auth("https://sjbportfolio.com");
 const logoutA = document.getElementById("logout_a");
 logoutA.addEventListener("click", async () => {
     const response = await auth.logoutUser();
-    console.log(response);
     
     if (response === true) {
         window.location.href = "/login";
