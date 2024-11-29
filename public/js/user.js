@@ -7,7 +7,6 @@ const userInfo = await fetch("https://sjbportfolio.com/auth/userInfo", {
 
 const user = await userInfo.json();
 const userData = JSON.parse(user.data);
-console.log(userData);
 
 const title = document.getElementById("api_title");
 title.textContent = `${userData.first_name}'s API Calls`;
