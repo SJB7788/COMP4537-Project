@@ -19,7 +19,6 @@ app.use(express.static(`${__dirname}/public`));
 // auth middleware function
 async function authMiddleware(req, res, next) {       
     const token = req.cookies && req.cookies._sid;
-    console.log(req.headers);
 
     if (!token) {
         return res.redirect('/login');
@@ -83,19 +82,19 @@ app.get("/register", (_, res) => {
     res.sendFile("public/register.html", {root: __dirname});
 });
 
-app.get("/user", authMiddleware, (_, res) => {
+app.get("/user", (_, res) => {
     res.sendFile("public/user.html", {root: __dirname});
 });
 
-app.get("/api", authMiddleware, (_, res) => {
+app.get("/api", (_, res) => {
     res.sendFile("public/api.html", {root: __dirname});
 });
 
-app.get("/admin", adminAuthMiddleware, (_, res) => {
+app.get("/admin", (_, res) => {
     res.sendFile("public/admin.html", {root: __dirname});
 });
 
-app.get("/details", adminAuthMiddleware, (_, res) => {
+app.get("/details", (_, res) => {
     res.sendFile("public/details.html", {root: __dirname});
 });
 

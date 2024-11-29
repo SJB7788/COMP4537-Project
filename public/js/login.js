@@ -1,6 +1,6 @@
 import { Auth } from "./auth/authClass.js";
 
-const auth = new Auth("http://localhost:5500");
+const auth = new Auth("https://sjbportfolio.com");
 
 const email = document.getElementById("email");
 const password = document.getElementById("password");
@@ -21,7 +21,7 @@ submit.addEventListener("click", async () => {
 });
 
 test.addEventListener("click", async () => {
-  await fetch("http://localhost:5500/test", {
+  await fetch("https://sjbportfolio.com/test", {
     method: "GET",
     credentials: "include",
   });

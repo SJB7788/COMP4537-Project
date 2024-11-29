@@ -21,10 +21,8 @@ export class Auth {
     });
 
     if (response.status == 200) {
-      console.log("Success!");
       return true;
     }
-    console.log("Failed.");
     return false;
   }
 
@@ -45,10 +43,8 @@ export class Auth {
     });
 
     if (response.status == 200) {
-      console.log("Success!");
       return true;
     }
-    console.log("Failed.");
     return false;
   }
 
@@ -62,12 +58,8 @@ export class Auth {
     });
 
     if (response.status == 200) {
-      console.log("a");
-      
-      console.log("Success!");
       return true;
     }
-    console.log("Failed.");
     return false;
   }
 }

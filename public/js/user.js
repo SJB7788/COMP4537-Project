@@ -1,6 +1,6 @@
 import { Auth } from "./auth/authClass.js";
 
-const userInfo = await fetch("http://localhost:5500/auth/userInfo", {
+const userInfo = await fetch("https://sjbportfolio.com/auth/userInfo", {
     method: "GET",
     credentials: "include",
 });
@@ -33,7 +33,7 @@ const apiCount = document.getElementById("api_count");
 const container = document.getElementById("api__table");
 const viewApiCall = new ViewAPICall(container);
 
-const everyAPICall = await fetch("http://localhost:5500/auth/apiCalls", {
+const everyAPICall = await fetch("https://sjbportfolio.com/auth/apiCalls", {
     credentials: "include",
 });
 const apiCalls = await everyAPICall.json();
@@ -47,7 +47,7 @@ if (apiCallsData.length > 0) {
     });
 }
 
-const auth = new Auth("http://localhost:5500");
+const auth = new Auth("https://sjbportfolio.com");
 const logoutA = document.getElementById("logout_a");
 logoutA.addEventListener("click", async () => {
     const response = await auth.logoutUser();

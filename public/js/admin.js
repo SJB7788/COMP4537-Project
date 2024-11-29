@@ -3,7 +3,7 @@ import { Auth } from "./auth/authClass.js";
 const userTable = document.getElementById("user_table");
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const response = await fetch("http://localhost:5500/auth/getAllUsers", {
+  const response = await fetch("https://sjbportfolio.com/auth/getAllUsers", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -40,10 +40,12 @@ function renderUsers(users) {
   });
 }
 
-const auth = new Auth("http://localhost:5500");
+const auth = new Auth("https://sjbportfolio.com");
 const logoutA = document.getElementById("logout_a");
 logoutA.addEventListener("click", async () => {
     const response = await auth.logoutUser();
+    console.log(response);
+    
     if (response === true) {
         window.location.href = "/login";
     }
