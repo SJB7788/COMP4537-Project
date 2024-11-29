@@ -26,7 +26,6 @@ async function sendSummarizeApiRequest() {
 
 summarizeButton.addEventListener("click", async () => {
     const jsonResult = await sendSummarizeApiRequest();
-    console.log(jsonResult);
     
     resultP.textContent = jsonResult.summary;
 });

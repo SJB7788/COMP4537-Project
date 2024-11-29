@@ -6,7 +6,7 @@ const email = document.getElementById("email");
 const password = document.getElementById("password");
 
 const submit = document.getElementById("submit");
-const test = document.getElementById("test");
+
 submit.addEventListener("click", async () => {
   const response = await auth.loginUser(email.value, password.value);
 
@@ -18,11 +18,4 @@ submit.addEventListener("click", async () => {
   const errorText = document.getElementById("error_message");
   errorText.textContent = "Invalid Email or Password";
   errorText.style.display = "block";
-});
-
-test.addEventListener("click", async () => {
-  await fetch("https://sjbportfolio.com/test", {
-    method: "GET",
-    credentials: "include",
-  });
 });

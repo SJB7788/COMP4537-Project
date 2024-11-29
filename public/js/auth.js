@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   const response = await sessionExists.json();
-  console.log(response);
   
   if (response.success === false) {
     return window.location.href = "/login";

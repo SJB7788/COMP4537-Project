@@ -33,8 +33,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const apiCallsData = await apiCallsResponse.json();
   const apiCalls = apiCallsData.data;
-  console.log(apiCalls);
-  
   renderApiCalls(apiCalls);
 });
 
