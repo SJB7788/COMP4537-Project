@@ -33,7 +33,7 @@ export class Auth {
     };
     const loginJson = JSON.stringify(loginBody);
 
-    const response = await fetch(`${this.endpoint}/auth/login`, {
+    const response = await fetch(`https://sjbportfolio.com/auth/login`, {
       method: "POST",
       body: loginJson,
       headers: {

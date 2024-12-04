@@ -17,8 +17,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`${__dirname}/public`));
 
 // auth middleware function
-async function authMiddleware(req, res, next) {       
-    const token = req.cookies && req.cookies._sid;
+async function authMiddleware(req, res, next) {
+    const token = req.cookies && req.cookies.sid;
 
     if (!token) {
         return res.redirect('/login');
@@ -40,21 +40,21 @@ async function authMiddleware(req, res, next) {
     const response = await sessionExists.json();    
     
     if (response.success === false) {
-        return res.redirect('/login');
+        // return res.redirect('/login');
     }
 
     next();
 }
 
 async function adminAuthMiddleware(req, res, next) {
-    const token = req.cookies && req.cookies._sid;
+    const token = req.cookies && req.cookies.sid;
 
     if (!token) {
         return res.redirect('/login');
     }
 
     const cookies = req.headers.cookie;
-
+    
     const sessionExists = await fetch("https://sjbportfolio.com/auth/checkAdmin", {
       method: "POST",
       headers: {
@@ -62,10 +62,10 @@ async function adminAuthMiddleware(req, res, next) {
         Cookie: cookies,
       },
       credentials: "include"
-    })
+    });
     
     const response = await sessionExists.json();
-    
+    console.log(response);
     if (response.success === false) {
         return res.redirect('/user');
     }
@@ -74,7 +74,6 @@ async function adminAuthMiddleware(req, res, next) {
 }
 
 app.get("/login", (req, res) => {
-    console.log(req.cookies._sid);
     res.sendFile("public/login.html", {root: __dirname});
 });
 
@@ -82,7 +81,7 @@ app.get("/register", (_, res) => {
     res.sendFile("public/register.html", {root: __dirname});
 });
 
-app.get("/user", (_, res) => {
+app.get("/user", authMiddleware, (_, res) => {
     res.sendFile("public/user.html", {root: __dirname});
 });
 
@@ -90,7 +89,7 @@ app.get("/api", (_, res) => {
     res.sendFile("public/api.html", {root: __dirname});
 });
 
-app.get("/admin", (_, res) => {
+app.get("/admin", adminAuthMiddleware, (_, res) => {
     res.sendFile("public/admin.html", {root: __dirname});
 });
 
